@@ -1,9 +1,4 @@
 <?php
-
-    // THIS METHOD IS REALLY BAD BUT, INSTAGRAM DON4T GIVE ME CHOICE ..
-    // their api is not working on my server but it is working on my local machine so
-    // my computer is sending every 5 min infos to the API (get_inst_info.php)
-
     require_once('class/funcs.php');
 
     /////////////////////////////////////// INSTAGRAM API ///////////////////////////////////////
@@ -37,13 +32,15 @@
         
     }
 
+    // print_r($instagram_photos_arr);
     $inst_rep_json=array('data'=>$instagram_photos_arr);
+    // $inst_rep_json=json_encode($inst_rep_json);
 
     $ch = curl_init();
 
     $data = $instagram_photos_arr;
 
-    curl_setopt($ch, CURLOPT_URL, 'http://URLTOYORWEBAPI/get_inst_info.php');
+    curl_setopt($ch, CURLOPT_URL, 'http://gpic.gaerisson-softs.fr/get_inst_info.php');
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false); // requis à partir de PHP 5.6.0 
     curl_setopt($ch, CURLOPT_POSTFIELDS, build_post_fields($data));

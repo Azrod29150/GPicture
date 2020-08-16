@@ -33,6 +33,23 @@
     <script src="js/main.js" ></script>
 
     <script src="js/progressive-image.js"></script>
+	
+	<link rel="apple-touch-icon" sizes="57x57" href="res/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="res/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="res/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="res/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="res/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="res/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="res/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="res/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="res/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="res/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="res/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="res/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="res/favicon/favicon-16x16.png">
+	<meta name="msapplication-TileImage" content="res/favicon/ms-icon-144x144.png">
+	<link rel="shortcut icon" href="res/favicon/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="res/favicon/favicon.ico" type="image/x-icon">
 
     <title>GPicture - Browse</title>  
     
@@ -69,8 +86,8 @@
 
         <section class="jumbotron text-center gpic_subbanner">
             <div class="container">
-                <h1>Gaerisson Picture - Gallery</h1>
-                <h3><div class="pic_nb_set"><?php print($flickr_nb_photos); ?></div> <div class="pic_nb">pictures</div></h3>
+                <h1><?php print(ucfirst($flickr_username)); ?> Picture - Gallery</h1>
+                <h3><span class="badge badge-primary"><span class="badge badge-light"><?php print($flickr_nb_photos); ?></span> pictures</span></h3>
             </div>
         </section>
 
@@ -97,7 +114,7 @@
                                 if($i<=1){
                                     $p_url=$p_thumbnail;
                                 }
-                                
+
                                 print('
                                 <a style="height: 100%;">
                                     <div  class="col-md-auto" style="height: 100%;cursor:pointer;">
@@ -115,7 +132,6 @@
                                 </a>
 
                                 ');
-                                // break;
                             }
 
                             print('
@@ -140,8 +156,8 @@
     <?php
          print('
             <meta property="og:site_name" content="GPic - Browse" >
-            <meta property="og:title" content="Gaerisson Picture - Gallery" />
-            <meta property="og:image" content="http://gpic.gaerisson-softs.fr/res/logo_gpic.png" />
+            <meta property="og:title" content="Azrod Picture - Gallery" />
+            <meta property="og:image" content="http://gpic.azrod29150.fr/res/logo_gpic.png" />
             
             <meta name="theme-color" content="#F19615" />
 

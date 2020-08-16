@@ -1,5 +1,6 @@
 <?php
 
-    $flickr_API="YOURAPI";
+$flickr_API="YOURFLICKRAPI";
+$flickr_Secret="";
 
 ?>

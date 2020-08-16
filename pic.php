@@ -21,37 +21,6 @@
     
     $flickr_nb_photos=$flickr_api_json['photos']['total'];
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // /////////////////////////////////////// INSTAGRAM API ///////////////////////////////////////
-    // $instagram_api_req=@file_get_contents("https://www.instagram.com/".$instagram_uid."/?__a=1");
-    // $instagram_api_json=json_decode($instagram_api_req,true);
-    // $instagram_api_json=$instagram_api_json['graphql'];
-    // ////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    // if(!isset($instagram_api_req) or empty($instagram_api_req)){
-    //     print('Error, Instagram API not responding');
-    //     exit;
-    // }
-
-    // // $inst_u_ext_url=$instagram_api_json['user']['external_url'];
-    // // $inst_u_ppic=$instagram_api_json['user']['profile_pic_url_hd'];
-    // // $inst_u_photos_count=$instagram_api_json['user']['edge_owner_to_timeline_media']['count'];
-    // $inst_u_photos=$instagram_api_json['user']['edge_owner_to_timeline_media']['edges'];
-
-    // $instagram_photos_arr=array();
-    // foreach($inst_u_photos as $key => $val){
-    //     $inst_p_id=$val['node']['shortcode'];
-    //     $inst_p_ref_url="https://www.instagram.com/p/".$inst_p_id."/";
-    //     // $inst_p_url=$val['node']['display_url'];
-    //     $inst_p_desc=$val['node']['edge_media_to_caption']['edges'][0]['node']['text'];
-    //     preg_match('/GPicID:\s(\d+\/\d+\/\d+\s\d+:\d+:\d+)G(\w+)\.\w+/', $inst_p_desc, $GPic_ID);
-
-    //     if($GPic_ID and !empty($GPic_ID)){
-    //         $Hid=hash('sha1',strtotime($GPic_ID[1]).$GPic_ID[2]);
-    //         $instagram_photos_arr[$Hid]=array('url'=>$inst_p_ref_url,'desc'=>$inst_p_desc);
-    //     }
-        
-    // }
     
     if(file_exists('instagram_data.json')){
         $instagram_photos_arr=json_decode(file_get_contents('instagram_data.json'),true);
@@ -59,6 +28,7 @@
         $instagram_photos_arr=array();
     }
     
+
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +55,23 @@
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/main.js" ></script>
     <script src="js/image-zoom.min.js"></script>
+	
+	<link rel="apple-touch-icon" sizes="57x57" href="res/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="res/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="res/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="res/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="res/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="res/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="res/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="res/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="res/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="res/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="res/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="res/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="res/favicon/favicon-16x16.png">
+	<meta name="msapplication-TileImage" content="res/favicon/ms-icon-144x144.png">
+	<link rel="shortcut icon" href="res/favicon/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="res/favicon/favicon.ico" type="image/x-icon">
 
     <title>GPicture - View (<?php print($_GET['id']); ?>)</title>
     
@@ -111,10 +98,6 @@
     <?php require_once('res/top.php'); ?>
 
     <main role="main">
-
-        <!-- <div class="album py-5 bg-light">
-            <div style="padding: 10px;margin: 0px 3%;">
-                <div class="row"> -->
                     <?php
                         foreach($flickr_api_json['photos']['photo'] as $i => $data){
                             if($p_id==$data['id']){
@@ -135,12 +118,12 @@
                                     $prev_img_uid=$flickr_api_json['photos']['photo'][$i-1];
                                     $prev_btn='
                                         <div class="prev_btn">
-                                            <a href="pic?id='.$prev_img_uid['id'].'">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-left-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                                    <path fill-rule="evenodd" d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z"/>
-                                                </svg>
-                                            </a>
+											<a class="badge badge-primary" href="pic?id='.$prev_img_uid['id'].'">
+												<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 1 0 .708L3.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+													<path fill-rule="evenodd" d="M2.5 8a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+												</svg>
+											</a>
                                         </div>
                                     ';
                                 }else{
@@ -152,11 +135,11 @@
                                     $next_img_uid=$flickr_api_json['photos']['photo'][$i+1];
                                     $next_btn='
                                         <div class="next_btn">
-                                            <a href="pic?id='.$next_img_uid['id'].'">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                                    <path fill-rule="evenodd" d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z"/>
-                                                </svg>
+                                            <a class="badge badge-primary" href="pic?id='.$next_img_uid['id'].'">
+												<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 8l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+													<path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8z"/>
+												</svg>
                                             </a>
                                         </div>
                                     ';
@@ -183,7 +166,6 @@
                                 if(!isset($Pic_Exif['exif']['ISO Speed'])){$Pic_Exif['exif']['ISO Speed']=$unknown_str;}
 
                                 $Hid = hash('sha1',strtotime(date("d/m/Y H:i:s",$Pic_Inf['date']['date_taken'])).$p_title_wh_ext);
-
                                 if(isset($instagram_photos_arr[$Hid])){
                                     $flickr_instagram_link=($instagram_photos_arr[$Hid]);
                                 }else{
@@ -197,9 +179,9 @@
                                 }
                                
                                 if($Pic_Exif['exif']['Flash']=="Off, Did not fire"){
-                                    $Flash="📷 Off";
+                                    $Flash="⚡ Off";
                                 }else{
-                                    $Flash="📸 On";
+                                    $Flash="⚡ On";
                                 }
 
                                 if($p_height>2000 & $p_width<3300){
@@ -252,11 +234,10 @@
                                                     <tbody>
                                                         <tr>
                                                             <td colspan="2">
-                                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-camera2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M9 5C7.343 5 5 6.343 5 8a4 4 0 0 1 4-4v1z"/>
-                                                                    <path fill-rule="evenodd" d="M14.333 3h-2.015A5.97 5.97 0 0 0 9 2a5.972 5.972 0 0 0-3.318 1H1.667C.747 3 0 3.746 0 4.667v6.666C0 12.253.746 13 1.667 13h4.015c.95.632 2.091 1 3.318 1a5.973 5.973 0 0 0 3.318-1h2.015c.92 0 1.667-.746 1.667-1.667V4.667C16 3.747 15.254 3 14.333 3zM1.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM9 13A5 5 0 1 0 9 3a5 5 0 0 0 0 10z"/>
-                                                                    <path d="M2 3a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1z"/>
-                                                                </svg>
+																<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-camera-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+																	<path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+																	<path fill-rule="evenodd" d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+																</svg>
                                                                  '.$Pic_Exif['exif']['Model'].'
                                                             </td>
                                                         </tr>
@@ -289,7 +270,7 @@
                                                                 '.$Flash.'
                                                             </td>
                                                             <td>
-                                                                
+                                                                📅 '.date("d/m/Y - H:i",$Pic_Inf['date']['date_taken']).'
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -325,7 +306,7 @@
                                             </div>
                                         </center>
                                         
-                                    </div>
+                                    </div><br><br><br>
                                 ');
                             }
                         }
@@ -345,7 +326,7 @@
     <?php require_once('res/bottom.php'); ?>
 
     <?php
-        $str_content="📷 ".$Pic_Exif["exif"]["Model"]." (".$Soft.")\n &nbsp; ⭕ ƒ/".$Pic_Exif["exif"]["Aperture"]." - 👁 ".$Pic_Exif["exif"]["Focal Length"]."\n &nbsp; ⏱️ ".$Pic_Exif["exif"]["Exposure"]." - ISO ".$Pic_Exif["exif"]["ISO Speed"]."\n &nbsp; 📅 ".date("d/m/Y H:i",$Pic_Inf['date']['date_taken']);
+        $str_content="📷 ".$Pic_Exif["exif"]["Model"]." (".$Soft.")\n &nbsp; ⭕ ƒ/".$Pic_Exif["exif"]["Aperture"]." - 👁 ".$Pic_Exif["exif"]["Focal Length"]."\n &nbsp; ⏱️ ".$Pic_Exif["exif"]["Exposure"]." - ISO ".$Pic_Exif["exif"]["ISO Speed"]."\n &nbsp; 📅 ".date("d/m/Y - H:i",$Pic_Inf['date']['date_taken']);
 
         print('
             <meta property="og:site_name" content="GPic - Viewer" >
